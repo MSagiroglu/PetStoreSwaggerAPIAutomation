@@ -13,6 +13,18 @@ import java.util.List;
 import java.util.Random;
 
 public class PetStoreApiBaseUrl {
+
+
+    public static RequestSpecification spec;
+
+    @BeforeClass
+    public void Setup() {
+
+        spec = new RequestSpecBuilder()
+                .setContentType(ContentType.JSON)
+                .setBaseUri("https://petstore.swagger.io/v2")
+                .build();
+    }
     public static Faker faker = new Faker();
     public static Integer tagsId;
     public static String tagsName;
@@ -27,7 +39,7 @@ public class PetStoreApiBaseUrl {
     public static List<String> photoUrls;
     public static CategoryPojo category;
 
-    @BeforeClass
+    @BeforeSuite
     public void setup() {
         tagsId = faker.number().randomDigit();
         tagsName = faker.name().name();
@@ -40,17 +52,6 @@ public class PetStoreApiBaseUrl {
         tags = Arrays.asList(new TagsPojo(tagsId, tagsName));
         photoUrls = Arrays.asList(photoUrl);
         category = new CategoryPojo(categoryId, categoryName);
-    }
-
-    public static RequestSpecification spec;
-
-    @BeforeTest
-    public void Setup() {
-
-        spec = new RequestSpecBuilder()
-                .setContentType(ContentType.JSON)
-                .setBaseUri("https://petstore.swagger.io/v2")
-                .build();
     }
 
     @BeforeMethod

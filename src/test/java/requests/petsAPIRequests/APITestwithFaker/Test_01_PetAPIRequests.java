@@ -1,20 +1,25 @@
-package requests.petsAPIRequests;
+package requests.petsAPIRequests.APITestwithFaker;
 
 import base_url.PetStoreApiBaseUrl;
+import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pojos.CategoryPojo;
 import pojos.PetPojo;
 import pojos.TagsPojo;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
 
 public class Test_01_PetAPIRequests extends PetStoreApiBaseUrl {
+
     @Test(priority = 1)
     public static void post() {
         // 1- Set the URL

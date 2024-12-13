@@ -1,4 +1,4 @@
-package requests.petsAPIRequests;
+package requests.petsAPIRequests.APITestWithDataProvider;
 
 import base_url.PetStoreApiBaseUrl;
 import io.restassured.http.ContentType;

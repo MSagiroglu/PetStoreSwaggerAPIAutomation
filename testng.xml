@@ -5,13 +5,10 @@
         <listener class-name="utulities.Listener"/>
     </listeners>
     <test name="API Automation Tests">
-        <classes>
-            <class name="requests.petsAPIRequests.Test_01_PetAPIRequests"/>
-        </classes>
+        <packages>
+            <package name="requests.petsAPIRequests.APITestwithFaker"/>
+            <package name="requests.petsAPIRequests.APITestWithDataProvider"/>
+        </packages>
     </test>
-    <test name="API Automation Tests with Data Providers">
-        <classes>
-            <class name="requests.petsAPIRequests.Test_02_PetAPIRequestsWithDataProviders"/>
-        </classes>
-    </test>
+
 </suite>
