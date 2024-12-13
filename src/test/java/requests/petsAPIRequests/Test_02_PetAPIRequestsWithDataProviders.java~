@@ -1,0 +1,106 @@
+package requests.petsAPIRequests;
+
+import base_url.PetStoreApiBaseUrl;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import org.testng.annotations.Test;
+import pojos.CategoryPojo;
+import pojos.PetPojo;
+import pojos.TagsPojo;
+import utulities.DataProviderUtil;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import static io.restassured.RestAssured.given;
+import static org.testng.Assert.assertEquals;
+
+public class PetAPIRequestsWithDataProviders extends PetStoreApiBaseUrl {
+    @Test(priority = 1, dataProvider = "petDatas", dataProviderClass = DataProviderUtil.class)
+    public static void post(Long id, CategoryPojo category, String name, List<String> photoUrls, List<TagsPojo> tags, String status) {
+        // 1- Set the URL
+        spec.pathParams("first", "pet");
+        // 2- Set the expected data
+        PetPojo payload = new PetPojo(id, category, name, photoUrls, tags, status);
+        System.out.println("payload = " + payload);
+        // 3- Send the request and get the response
+        Response response = given()
+                .spec(spec)
+                .contentType(ContentType.JSON)
+                .body(payload).when()
+                .post("{first}");
+        response.prettyPrint();
+
+
+        // 4- Verify the response
+        PetPojo actualData = response.as(PetPojo.class);
+        System.out.println("actualData = " + actualData);
+        assertEquals(200, response.statusCode());
+        assertEquals(actualData.getName(), payload.getName());
+        assertEquals(actualData.getCategory().getId(), payload.getCategory().getId());
+        assertEquals(actualData.getCategory().getName(), payload.getCategory().getName());
+        assertEquals(actualData.getTags(), payload.getTags());
+        assertEquals(actualData.getStatus(), payload.getStatus());
+        assertEquals(actualData.getPhotoUrls(), payload.getPhotoUrls());
+        assertEquals(actualData.getId(), payload.getId());
+    }
+
+    @Test(priority = 3, dependsOnMethods = "post", dataProvider = "newPetDatas", dataProviderClass = DataProviderUtil.class)
+    public void getById(Long id, CategoryPojo category, String name, List<String> photoUrls, List<TagsPojo> tags, String status) {
+        // 1- Set the URL
+        spec.pathParams("first", "pet", "second", id);
+        // 2- Send the request and get the response
+        Response response = given().spec(spec).contentType(ContentType.JSON).when().get("{first}/{second}");
+        response.prettyPrint();
+        // 3- Verify the response
+        PetPojo actualData = response.as(PetPojo.class);
+        System.out.println("actualData = " + actualData);
+        assertEquals(200, response.statusCode());
+        assertEquals(actualData.getName(), name);
+        assertEquals(actualData.getCategory().getId(), category.getId());
+        assertEquals(actualData.getCategory().getName(), category.getName());
+        assertEquals(actualData.getTags(), tags);
+        assertEquals(actualData.getStatus(), status);
+        assertEquals(actualData.getPhotoUrls(), photoUrls);
+        assertEquals(actualData.getId(), id);
+    }
+
+
+    @Test(priority = 2, dependsOnMethods = "post", dataProvider = "newPetDatas", dataProviderClass = DataProviderUtil.class)
+    public void put(Long id, CategoryPojo category, String name, List<String> photoUrls, List<TagsPojo> tags, String status) {
+        // 1- Set the URL
+        spec.pathParams("first", "pet");
+        // 2- Set the expected data
+        PetPojo payload = new PetPojo(id, category, name, photoUrls, tags, status);
+        System.out.println("payload = " + payload);
+        // 3- Send the PUT request and get the response
+        Response response = given().spec(spec).contentType(ContentType.JSON).body(payload).when().put("{first}");
+        response.prettyPrint();
+        // 4- Verify the response
+        PetPojo actualData = response.as(PetPojo.class);
+        System.out.println("actualData = " + actualData);
+        assertEquals(200, response.statusCode());
+        assertEquals(actualData.getName(), payload.getName());
+        assertEquals(actualData.getCategory().getId(), payload.getCategory().getId());
+        assertEquals(actualData.getCategory().getName(), payload.getCategory().getName());
+        assertEquals(actualData.getTags(), payload.getTags());
+        assertEquals(actualData.getStatus(), payload.getStatus());
+        assertEquals(actualData.getPhotoUrls(), payload.getPhotoUrls());
+    }
+
+
+    @Test(priority = 4, dependsOnMethods = "post", dataProvider = "newPetDatas", dataProviderClass = DataProviderUtil.class)
+    public void delete(Long id, CategoryPojo category, String name, List<String> photoUrls, List<TagsPojo> tags, String status) {
+        // 1- Set the URL
+        spec.pathParams("first", "pet", "second", id);
+
+        // 2- Send the request and get the response
+        Response response = given().spec(spec).contentType(ContentType.JSON).header("api_key", "special-key").when().delete("{first}/{second}");
+        response.prettyPrint();
+        // 3- Verify the response
+        assertEquals(200, response.statusCode());
+        assertEquals(response.jsonPath().getString("message"),id.toString());
+    }
+
+}
