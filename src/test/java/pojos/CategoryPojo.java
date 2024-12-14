@@ -7,10 +7,10 @@ public class CategoryPojo {
     "name": "Dog"
   }
      */
-    private Integer id;
+    private Long id;
     private String name;
 
-    public CategoryPojo(Integer id, String name) {
+    public CategoryPojo(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -18,11 +18,11 @@ public class CategoryPojo {
     public CategoryPojo() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -7,12 +7,14 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.*;
 import pojos.CategoryPojo;
 import pojos.TagsPojo;
+import utilities.ExtentReport;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class PetStoreApiBaseUrl {
+public class PetStoreApiBaseUrl extends ExtentReport {
+
 
 
     public static RequestSpecification spec;
@@ -26,10 +28,10 @@ public class PetStoreApiBaseUrl {
                 .build();
     }
     public static Faker faker = new Faker();
-    public static Integer tagsId;
+    public static Long tagsId;
     public static String tagsName;
     public static String photoUrl;
-    public static Integer categoryId;
+    public static Long categoryId;
     public static String categoryName;
     public static String petName;
     public static Long petId;
@@ -41,10 +43,10 @@ public class PetStoreApiBaseUrl {
 
     @BeforeSuite
     public void setup() {
-        tagsId = faker.number().randomDigit();
+        tagsId = faker.number().randomNumber(15,true);
         tagsName = faker.name().name();
         photoUrl = faker.internet().url();
-        categoryId = faker.number().randomDigit();
+        categoryId = faker.number().randomNumber(15,true);
         categoryName = faker.name().name();
         petName = faker.name().name();
         petId = faker.number().randomNumber();
