@@ -39,15 +39,22 @@ public class ExtentReport {
     }
 
     public static void testOlustur(String testAdi) {
-        if (extent != null) { test = extent.createTest(testAdi); }
+        if (extent != null) {
+            test = extent.createTest(testAdi);
+        }
     }
 
     public static void bilgiNotu(String bilgiNotu) {
-        if (test != null) { test.info(bilgiNotu); }
+        if (test != null) {
+            test.info(bilgiNotu);
+        }
     }
 
     public static void raporuKaydet() {
-        if (extent != null) { extent.flush(); };
+        if (extent != null) {
+            extent.flush();
+        }
+        ;
     }
 }
 
