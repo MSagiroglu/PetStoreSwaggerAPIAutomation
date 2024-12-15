@@ -1,36 +1,36 @@
-package pojos;
+package pojos.petPojos.negativePetPojos;
 
-public class CategoryPojo {
+public class NegativeCategoryPojo {
     /*
     "category": {
     "id": 5,
     "name": "Dog"
   }
      */
-    private Long id;
-    private String name;
+    private String id;
+    private Integer name;
 
-    public CategoryPojo(Long id, String name) {
+    public NegativeCategoryPojo(String id, Integer name) {
         this.id = id;
         this.name = name;
     }
 
-    public CategoryPojo() {
+    public NegativeCategoryPojo() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getName() {
+    public Integer getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Integer name) {
         this.name = name;
     }
 

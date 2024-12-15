@@ -1,22 +1,24 @@
-package pojos;
+package pojos.petPojos.negativePetPojos;
 
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import pojos.petPojos.positivePetPojo.CategoryPojo;
+import pojos.petPojos.positivePetPojo.TagsPojo;
 
-import java.util.Arrays;
 import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PetPojo {
+public class NegativePetPojo {
 
-    private Long id;
-    private CategoryPojo category;
-    private String name;
-    private List<String> photoUrls;
-    private List<TagsPojo> tags;
-    private String status;
+    private Boolean id;
+    private NegativeCategoryPojo category;
+    private Integer name;
+    private List<Integer> photoUrls;
+    private List<NegativeTagsPojo> tags;
+    private String  status;
 
-    public PetPojo(Long id, CategoryPojo category, String name, List<String> photoUrls, List<TagsPojo> tags, String status) {
+    public NegativePetPojo(Boolean id, NegativeCategoryPojo category, Integer name, List<Integer> photoUrls, List<NegativeTagsPojo> tags, String status) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -25,46 +27,46 @@ public class PetPojo {
         this.status = status;
     }
 
-    public PetPojo() {
+    public NegativePetPojo() {
     }
 
-    public Long getId() {
+    public Boolean getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Boolean id) {
         this.id = id;
     }
 
-    public CategoryPojo getCategory() {
+    public NegativeCategoryPojo getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryPojo category) {
+    public void setCategory(NegativeCategoryPojo category) {
         this.category = category;
     }
 
-    public String getName() {
+    public Integer getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Integer name) {
         this.name = name;
     }
 
-    public List<String> getPhotoUrls() {
+    public List<Integer> getPhotoUrls() {
         return photoUrls;
     }
 
-    public void setPhotoUrls(List<String> photoUrls) {
+    public void setPhotoUrls(List<Integer> photoUrls) {
         this.photoUrls = photoUrls;
     }
 
-    public List<TagsPojo> getTags() {
+    public List<NegativeTagsPojo> getTags() {
         return tags;
     }
 
-    public void setTags(List<TagsPojo> tags) {
+    public void setTags(List<NegativeTagsPojo> tags) {
         this.tags = tags;
     }
 

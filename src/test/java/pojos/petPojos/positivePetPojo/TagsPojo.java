@@ -1,4 +1,4 @@
-package pojos;
+package pojos.petPojos.positivePetPojo;
 
 import java.util.Objects;
 

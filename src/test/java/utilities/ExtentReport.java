@@ -21,20 +21,21 @@ public class ExtentReport {
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
             String formattedNow = now.format(formatter);
-            String path = System.getProperty("user.dir") + File.separator + "raporlar" + File.separator + "rapor" + System.currentTimeMillis() + ".html";
+            String path = System.getProperty("user.dir") + File.separator + "reports" + File.separator + "Report " + System.currentTimeMillis() + ".html";
             ExtentSparkReporter reporter = new ExtentSparkReporter(path);
-            reporter.config().setDocumentTitle("Pet Store API Tests Report");
-            reporter.config().setReportName("Pet Store Swagger API Automation Report");
+            reporter.config().setDocumentTitle("Pet Store Swagger API Automation Report");
+            reporter.config().setReportName(" Pet Store API Tests Report");
             reporter.config().setDocumentTitle("Pet Store API Report");
             reporter.config().setTheme(Theme.DARK);
 
             extent = new ExtentReports();
             extent.attachReporter(reporter);
             extent.setSystemInfo("HostName", "Localhost");
+            extent.setSystemInfo("OS", "Windows 10");
             extent.setSystemInfo("Environment", "QA");
             extent.setSystemInfo("Tester", "Mustafa SAĞIROĞLU");
             // Bugünün tarihini ve saatini formatlamak
-            extent.setSystemInfo("Test Tarihi", formattedNow);
+            extent.setSystemInfo("Test Date/Time", formattedNow);
         }
     }
 

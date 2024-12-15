@@ -5,10 +5,12 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.*;
-import pojos.CategoryPojo;
-import pojos.TagsPojo;
+import pojos.petPojos.positivePetPojo.CategoryPojo;
+import pojos.petPojos.positivePetPojo.TagsPojo;
 import utilities.ExtentReport;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -19,7 +21,7 @@ public class PetStoreApiBaseUrl extends ExtentReport {
 
     public static RequestSpecification spec;
 
-    @BeforeClass
+    @BeforeMethod
     public void Setup() {
 
         spec = new RequestSpecBuilder()
@@ -40,10 +42,16 @@ public class PetStoreApiBaseUrl extends ExtentReport {
     public static List<TagsPojo> tags;
     public static List<String> photoUrls;
     public static CategoryPojo category;
+    public static Long orderID;
+    public static Integer quantity;
+    public static LocalDateTime now = LocalDateTime.now();
+    public static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+    public static String shipDate ;
+    public static Boolean complete ;
 
     @BeforeSuite
     public void setup() {
-        tagsId = faker.number().randomDigit();
+        tagsId = faker.number().randomNumber(15,true);
         tagsName = faker.name().name();
         photoUrl = faker.internet().url();
         categoryId = faker.number().randomNumber(15,true);
@@ -54,12 +62,13 @@ public class PetStoreApiBaseUrl extends ExtentReport {
         tags = Arrays.asList(new TagsPojo(tagsId, tagsName));
         photoUrls = Arrays.asList(photoUrl);
         category = new CategoryPojo(categoryId, categoryName);
+        orderID = faker.number().randomNumber();
+        quantity = faker.number().randomDigit();
+        shipDate = now.format(formatter);
+        complete=faker.bool().bool();
     }
 
-    @BeforeMethod
-    public void beforeMethod() {
-        System.out.println("Yeni test başladı.");
-    }
+
 
 
 }

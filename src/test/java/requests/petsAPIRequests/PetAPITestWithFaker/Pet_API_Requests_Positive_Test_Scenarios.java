@@ -1,4 +1,4 @@
-package requests.petsAPIRequests.APITestwithFaker;
+package requests.petsAPIRequests.PetAPITestWithFaker;
 
 import base_url.PetStoreApiBaseUrl;
 import com.aventstack.extentreports.ExtentReports;
@@ -7,8 +7,8 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-import pojos.PetPojo;
-import pojos.TagsPojo;
+import pojos.petPojos.positivePetPojo.PetPojo;
+import pojos.petPojos.positivePetPojo.TagsPojo;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,15 +16,16 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
-public class Test_02_PetAPIRequestsNegativeTestScenarios extends PetStoreApiBaseUrl {
+public class Pet_API_Requests_Positive_Test_Scenarios extends PetStoreApiBaseUrl {
     public static ExtentReports extent;
     public static ExtentTest test;
     public static ExtentHtmlReporter htmlReporter;
 
 
     @Test(priority = 1)
-    public static void post() {
+    public static void post_Api_Create_Pet_With_Faker() {
 
         // 1- Set the URL
         bilgiNotu("URL Ayarlandi");
@@ -64,10 +65,12 @@ public class Test_02_PetAPIRequestsNegativeTestScenarios extends PetStoreApiBase
         assertEquals(actualData.getPhotoUrls(), payload.getPhotoUrls());
         bilgiNotu("Response id verisi dogrulandı");
         assertEquals(actualData.getId(), payload.getId());
+        bilgiNotu("Response Süresi Verisi Dogrulandı");
+        assertTrue(response.getTime() < 1500);
     }
 
-    @Test(priority = 3, dependsOnMethods = "post")
-    public void getById() {
+    @Test(priority = 3, dependsOnMethods = "post_Api_Create_Pet_With_Faker")
+    public void get_Api_Find_ById_With_Faker() {
         // 1- Set the URL
         bilgiNotu("URL Ayarlandi");
         spec.pathParams("first", "pet", "second", petId);
@@ -93,11 +96,13 @@ public class Test_02_PetAPIRequestsNegativeTestScenarios extends PetStoreApiBase
         assertEquals(actualData.getPhotoUrls(), Collections.singletonList(photoUrl));
         bilgiNotu("Response id verisi dogrulandı");
         assertEquals(actualData.getId(), petId);
+        bilgiNotu("Response Süresi Verisi Dogrulandı");
+        assertTrue(response.getTime() < 1500);
     }
 
 
-    @Test(priority = 2, dependsOnMethods = "post")
-    public void put() {
+    @Test(priority = 2, dependsOnMethods = "post_Api_Create_Pet_With_Faker")
+    public void put_Api_Update_Pet_With_Faker() {
         // 1- Set the URL
         bilgiNotu("URL Ayarlandi");
         spec.pathParams("first", "pet");
@@ -130,10 +135,12 @@ public class Test_02_PetAPIRequestsNegativeTestScenarios extends PetStoreApiBase
         assertEquals(actualData.getStatus(), payload.getStatus());
         bilgiNotu("Response photoUrls verisi dogrulandı");
         assertEquals(actualData.getPhotoUrls(), payload.getPhotoUrls());
+        bilgiNotu("Response Süresi Verisi Dogrulandı");
+        assertTrue(response.getTime() < 1500);
     }
 
-    @Test(priority = 5, dependsOnMethods = "post")
-    public void getByStatus() {
+    @Test(priority = 5, dependsOnMethods = "post_Api_Create_Pet_With_Faker")
+    public void get_Api_Find_ByStatus_With_Faker() {
         // 1- Set the URL
         bilgiNotu("URL Ayarlandi");
         spec.pathParams("first", "pet", "second", "findByStatus").queryParam("status", petStatus1); // Durum parametresini ayarlayın
@@ -148,6 +155,8 @@ public class Test_02_PetAPIRequestsNegativeTestScenarios extends PetStoreApiBase
         System.out.println("actualData = " + actualData);
         bilgiNotu("Response kodu doğrulandı");
         assertEquals(200, response.statusCode());
+        bilgiNotu("Response Süresi Verisi Dogrulandı");
+        assertTrue(response.getTime() < 1500);
 
         for (PetPojo pet : actualData) {
             bilgiNotu("Respons Liste verileri dogrulandı ve status verileri dogrulandı");
@@ -155,8 +164,8 @@ public class Test_02_PetAPIRequestsNegativeTestScenarios extends PetStoreApiBase
         }
     }
 
-    @Test(priority = 4, dependsOnMethods = {"post", "put"})
-    public void delete() {
+    @Test(priority = 4, dependsOnMethods = {"post_Api_Create_Pet_With_Faker", "put_Api_Update_Pet_With_Faker"})
+    public void delete_Api_Delete_Pet_With_Faker() {
         // 1- Set the URL
         bilgiNotu("URL Ayarlandi");
         spec.pathParams("first", "pet", "second", petId);
@@ -170,6 +179,8 @@ public class Test_02_PetAPIRequestsNegativeTestScenarios extends PetStoreApiBase
         assertEquals(200, response.statusCode());
         bilgiNotu("Response message verisi dogrulandı");
         assertEquals(response.body().jsonPath().getString("message"), petId.toString());
+        bilgiNotu("Response Süresi Verisi Dogrulandı");
+        assertTrue(response.getTime() < 1500);
     }
 
 }

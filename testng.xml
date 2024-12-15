@@ -6,8 +6,10 @@
     </listeners>
     <test name="API Automation Tests">
         <packages>
-            <package name="requests.petsAPIRequests.APITestwithFaker"/>
-            <package name="requests.petsAPIRequests.APITestWithDataProvider"/>
+            <package name="requests.petsAPIRequests.PetAPITestWithFaker"/>
+            <package name="requests.petsAPIRequests.PetAPITestWithDataProvider"/>
+            <package name="requests.storeAPIRequests"/>
+            <package name="requests.userAPIRequests"/>
         </packages>
     </test>
 

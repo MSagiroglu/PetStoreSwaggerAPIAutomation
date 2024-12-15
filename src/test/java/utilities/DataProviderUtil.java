@@ -1,8 +1,8 @@
 package utilities;
 
 import org.testng.annotations.DataProvider;
-import pojos.CategoryPojo;
-import pojos.TagsPojo;
+import pojos.petPojos.positivePetPojo.CategoryPojo;
+import pojos.petPojos.positivePetPojo.TagsPojo;
 
 import java.util.Arrays;
 

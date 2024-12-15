@@ -18,7 +18,7 @@ public class Listener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         testOlustur(result.getMethod().getMethodName().toUpperCase());
-        test.assignCategory(result.getTestClass().getName().toUpperCase());
+        test.assignCategory(result.getTestClass().getName().substring(result.getTestClass().getName().lastIndexOf(".") + 1));
         test.info(result.getMethod().getMethodName().toUpperCase() +" Testi başladı.");
     }
 

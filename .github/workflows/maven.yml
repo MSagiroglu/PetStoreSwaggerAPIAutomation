@@ -1,4 +1,4 @@
-name: Java API Automation Tests
+name: Pet Store Swagger API Automation Tests With Java & Rest Assured & Maven & TestNG
 
 on:
   push:
