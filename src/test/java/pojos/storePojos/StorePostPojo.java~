@@ -1,0 +1,72 @@
+
+package pojos.storePojos;
+
+import javax.annotation.Generated;
+import com.google.gson.annotations.SerializedName;
+
+@Generated("net.hexar.json2pojo")
+@SuppressWarnings("unused")
+public class StorePostPojo {
+
+    @SerializedName("complete")
+    private Boolean mComplete;
+    @SerializedName("id")
+    private Long mId;
+    @SerializedName("petId")
+    private Long mPetId;
+    @SerializedName("quantity")
+    private Long mQuantity;
+    @SerializedName("shipDate")
+    private String mShipDate;
+    @SerializedName("status")
+    private String mStatus;
+
+    public Boolean getComplete() {
+        return mComplete;
+    }
+
+    public void setComplete(Boolean complete) {
+        mComplete = complete;
+    }
+
+    public Long getId() {
+        return mId;
+    }
+
+    public void setId(Long id) {
+        mId = id;
+    }
+
+    public Long getPetId() {
+        return mPetId;
+    }
+
+    public void setPetId(Long petId) {
+        mPetId = petId;
+    }
+
+    public Long getQuantity() {
+        return mQuantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        mQuantity = quantity;
+    }
+
+    public String getShipDate() {
+        return mShipDate;
+    }
+
+    public void setShipDate(String shipDate) {
+        mShipDate = shipDate;
+    }
+
+    public String getStatus() {
+        return mStatus;
+    }
+
+    public void setStatus(String status) {
+        mStatus = status;
+    }
+
+}
